@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himachal 2025 🏔️ 🐦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: clamp(1.2em, 5vw, 2em);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .user-section input {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        .user-section button, .btn-primary {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .user-section button:hover, .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .welcome {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn {
+            padding: 10px 16px;
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+            font-size: clamp(1.2em, 4vw, 1.5em);
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            background: rgba(102, 126, 234, 0.05);
+            border-color: #5568d3;
+        }
+
+        .upload-icon {
+            font-size: clamp(32px, 8vw, 48px);
+            margin-bottom: 10px;
+        }
+
+        .memory-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .memory-form input, .memory-form textarea {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .memory-form textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .memory-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .memory-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .memory-content {
+            padding: 15px;
+        }
+
+        .memory-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+        }
+
+        .memory-description {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .memory-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #999;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .chat-container {
+            height: 60vh;
+            max-height: 600px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .chat-message {
+            margin-bottom: 12px;
+            padding: 10px 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            word-wrap: break-word;
+        }
+
+        .chat-message-author {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .chat-message-text {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .chat-message-time {
+            font-size: 10px;
+            color: #999;
+            margin-left: 8px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            min-width: 0;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card h3 {
+            margin-bottom: 10px;
+            font-size: clamp(16px, 4vw, 20px);
+        }
+
+        .game-card p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .tictactoe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 20px auto;
+            max-width: 320px;
+            aspect-ratio: 1;
+        }
+
+        .tictactoe-cell {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: clamp(24px, 6vw, 36px);
+            font-weight: bold;
+            color: #667eea;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            aspect-ratio: 1;
+        }
+
+        .tictactoe-cell:hover {
+            background: #f0f0f0;
+        }
+
+        .game-status {
+            text-align: center;
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 600;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: clamp(40px, 10vw, 64px);
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: clamp(16px, 4vw, 20px);
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 8px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            header {
+                padding: 12px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            .user-section {
+                justify-content: center;
+            }
+
+            .nav-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .memories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .chat-input-area {
+                flex-direction: column;
+            }
+
+            .chat-input-area button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>🏔️ Himachal 2026 🐦</h1>
+                <div class="user-section" id="userSection">
+                    <input type="text" id="usernameInput" placeholder="Enter your name">
+                    <button onclick="setUsername()">Join</button>
+                </div>
+                <div class="user-section" id="welcomeSection" style="display: none;">
+                    <span class="welcome">Welcome, <span id="currentUser"></span>! 👋</span>
+                </div>
+            </div>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" onclick="showSection('memories')">📸 Memories</button>
+            <button class="nav-btn" onclick="showSection('chat')">💬 Gossip</button>
+            <button class="nav-btn" onclick="showSection('games')">🎮 Games</button>
+        </nav>
+
+        <!-- Memories Section -->
+        <div id="memories" class="section active">
+            <h2>Share Your Memories</h2>
+            
+            <div class="upload-area" onclick="document.getElementById('imageInput').click()">
+                <div class="upload-icon">📷</div>
+                <p style="color: #667eea; font-weight: 600; font-size: 15px;">Click to upload a photo</p>
+                <p style="color: #999; font-size: 13px; margin-top: 5px;">or drag and drop</p>
+                <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageSelect(event)">
+            </div>
+
+            <div class="memory-form">
+                <input type="text" id="memoryTitle" placeholder="Memory title (e.g., 'Sunset at Rohtang Pass')">
+                <textarea id="memoryDescription" placeholder="Tell us about this memory..."></textarea>
+                <button class="btn-primary" onclick="addMemory()">Share Memory</button>
+            </div>
+
+            <h2 style="margin-top: 40px;">Our Trip Memories</h2>
+            <div class="memories-grid" id="memoriesGrid"></div>
+        </div>
+
+        <!-- Chat Section -->
+        <div id="chat" class="section">
+            <h2>Gossip Corner</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleChatEnter(event)">
+                    <button class="btn-primary" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div id="games" class="section">
+            <h2>Play Together</h2>
+            <div class="game-grid">
+                <div class="game-card" onclick="startGame('tictactoe')">
+                    <h3>❌⭕ Tic Tac Toe</h3>
+                    <p>Classic game for two</p>
+                </div>
+                <div class="game-card" onclick="startGame('trivia')">
+                    <h3>🧠 Trip Trivia</h3>
+                    <p>Test your knowledge</p>
+                </div>
+                <div class="game-card" onclick="startGame('emoji')">
+                    <h3>😄 Emoji Story</h3>
+                    <p>Create emoji stories</p>
+                </div>
+            </div>
+
+            <div id="gameArea" style="margin-top: 30px;"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentUsername = '';
+        let memories = [];
+        let chatMessages = [];
+        let gameState = {};
+
+        // Initialize from storage
+        async function initApp() {
+            try {
+                const memoriesData = await window.storage.get('himachal-2026-memories');
+                if (memoriesData) memories = JSON.parse(memoriesData.value);
+                
+                const chatData = await window.storage.get('himachal-2026-chat');
+                if (chatData) chatMessages = JSON.parse(chatData.value);
+                
+                renderMemories();
+                renderChat();
+            } catch (e) {
+                console.log('Initializing fresh data');
+            }
+        }
+
+        function setUsername() {
+            const input = document.getElementById('usernameInput');
+            const name = input.value.trim();
+            if (name) {
+                currentUsername = name;
+                document.getElementById('userSection').style.display = 'none';
+                document.getElementById('welcomeSection').style.display = 'flex';
+                document.getElementById('currentUser').textContent = name;
+            }
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(section).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        let selectedImage = null;
+
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Check file size (max 4MB to stay under 5MB storage limit)
+                if (file.size > 4 * 1024 * 1024) {
+                    alert('Image is too large! Please choose an image under 4MB.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    selectedImage = e.target.result;
+                    document.querySelector('.upload-area').style.background = 'rgba(102, 126, 234, 0.1)';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function addMemory() {
+            if (!currentUsername) {
+                alert('Please enter your name first!');
+                return;
+            }
+
+            const title = document.getElementById('memoryTitle').value.trim();
+            const description = document.getElementById('memoryDescription').value.trim();
+
+            if (!title) {
+                alert('Please add a title!');
+                return;
+            }
+
+            const memory = {
+                id: Date.now(),
+                title,
+                description,
+                image: selectedImage || `https://via.placeholder.com/400x300/667eea/ffffff?text=${encodeURIComponent(title)}`,
+                author: currentUsername,
+                date: new Date().toLocaleDateString(),
+                timestamp: Date.now()
+            };
+
+            memories.unshift(memory);
+            
+            try {
+                await window.storage.set('himachal-2026-memories', JSON.stringify(memories));
+            } catch (e) {
+                console.error('Storage error:', e);
+                alert('Failed to save memory. The image might be too large.');
+            }
+
+            document.getElementById('memoryTitle').value = '';
+            document.getElementById('memoryDescription').value = '';
+            document.getElementById('imageInput').value = '';
+            selectedImage = null;
+            document.querySelector('.upload-area').style.background = '';
+
+            renderMemories();
+        }
+
+        function renderMemories() {
+            const grid = document.getElementById('memoriesGrid');
+            
+            if (memories.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">🏔️</div>
+                        <h3>No memories yet!</h3>
+                        <p>Be the first to share from Himachal 2026</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = memories.map(memory => `
+                <div class="memory-card">
+                    <img src="${memory.image}" alt="${memory.title}" class="memory-image" onerror="this.src='https://via.placeholder.com/400x300/667eea/ffffff?text=Memory'">
+                    <div class="memory-content">
+                        <div class="memory-title">${memory.title}</div>
+                        <div class="memory-description">${memory.description || 'No description'}</div>
+                        <div class="memory-meta">
+                            <span>👤 ${memory.author}</span>
+                            <span>📅 ${memory.date}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function sendMessage() {
+            if (!currentUsername) {
+                alert('Please enter your name first!');
+                return;
+            }
+
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            const chatMessage = {
+                id: Date.now(),
+                author: currentUsername,
+                message,
+                time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                timestamp: Date.now()
+            };
+
+            chatMessages.push(chatMessage);
+            
+            try {
+                await window.storage.set('himachal-2026-chat', JSON.stringify(chatMessages));
+            } catch (e) {
+                console.error('Storage error:', e);
+            }
+
+            input.value = '';
+            renderChat();
+        }
+
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') sendMessage();
+        }
+
+        function renderChat() {
+            const container = document.getElementById('chatMessages');
+            
+            if (chatMessages.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">💬</div>
+                        <h3>No messages yet!</h3>
+                        <p>Start the conversation!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = chatMessages.map(msg => `
+                <div class="chat-message">
+                    <div class="chat-message-author">
+                        ${msg.author}
+                        <span class="chat-message-time">${msg.time}</span>
+                    </div>
+                    <div class="chat-message-text">${msg.message}</div>
+                </div>
+            `).join('');
+
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function startGame(gameType) {
+            const gameArea = document.getElementById('gameArea');
+            
+            if (gameType === 'tictactoe') {
+                gameState.board = Array(9).fill('');
+                gameState.currentPlayer = 'X';
+                gameState.winner = null;
+                
+                gameArea.innerHTML = `
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: clamp(16px, 4vw, 20px);">Tic Tac Toe</h3>
+                    <div class="game-status" id="gameStatus">Player X's turn</div>
+                    <div class="tictactoe-board" id="tictactoeBoard"></div>
+                    <button class="btn-primary" onclick="startGame('tictactoe')" style="display: block; margin: 20px auto;">New Game</button>
+                `;
+                
+                renderTicTacToe();
+            } else if (gameType === 'trivia') {
+                gameArea.innerHTML = `
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: clamp(16px, 4vw, 20px);">Trip Trivia</h3>
+                    <div style="text-align: center; color: #666; padding: 30px 20px; background: #f8f9fa; border-radius: 12px;">
+                        <p style="margin-bottom: 15px;">Create custom trivia questions about your Himachal trip!</p>
+                        <p>Ask about: Funniest moments, Best food, Most memorable views, Inside jokes</p>
+                    </div>
+                `;
+            } else if (gameType === 'emoji') {
+                gameArea.innerHTML = `
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: clamp(16px, 4vw, 20px);">Emoji Story</h3>
+                    <div style="text-align: center; color: #666; padding: 30px 20px; background: #f8f9fa; border-radius: 12px;">
+                        <p style="margin-bottom: 15px;">Tell your trip story using only emojis!</p>
+                        <p style="font-size: 24px;">🏔️✈️🚗🏨🍕🎉📸🌄🐦</p>
+                        <p style="margin-top: 15px;">See if friends can guess what happened!</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderTicTacToe() {
+            const board = document.getElementById('tictactoeBoard');
+            board.innerHTML = gameState.board.map((cell, index) => `
+                <div class="tictactoe-cell" onclick="makeMove(${index})">${cell}</div>
+            `).join('');
+        }
+
+        function makeMove(index) {
+            if (gameState.board[index] || gameState.winner) return;
+            
+            gameState.board[index] = gameState.currentPlayer;
+            
+            if (checkWinner()) {
+                gameState.winner = gameState.currentPlayer;
+                document.getElementById('gameStatus').textContent = `Player ${gameState.currentPlayer} wins! 🎉`;
+            } else if (gameState.board.every(cell => cell)) {
+                document.getElementById('gameStatus').textContent = "It's a draw! 🤝";
+            } else {
+                gameState.currentPlayer = gameState.currentPlayer === 'X' ? 'O' : 'X';
+                document.getElementById('gameStatus').textContent = `Player ${gameState.currentPlayer}'s turn`;
+            }
+            
+            renderTicTacToe();
+        }
+
+        function checkWinner() {
+            const wins = [
+                [0,1,2], [3,4,5], [6,7,8],
+                [0,3,6], [1,4,7], [2,5,8],
+                [0,4,8], [2,4,6]
+            ];
+            
+            return wins.some(combo => {
+                const [a, b, c] = combo;
+                return gameState.board[a] && 
+                       gameState.board[a] === gameState.board[b] && 
+                       gameState.board[a] === gameState.board[c];
+            });
+        }
+
+        // Initialize app
+        initApp();
+    </script>
+</body>
+</html>
